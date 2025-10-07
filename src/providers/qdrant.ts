@@ -7,3 +7,11 @@ const qdrantvectorStore = await QdrantVectorStore.fromExistingCollection(mistral
 });
 
 export default qdrantvectorStore;
+
+
+
+
+mkdir -p docs/images
+cp /home/winglesssnail/Pictures/screenshot.png docs/images/
+git add docs/images/photo.png
+
