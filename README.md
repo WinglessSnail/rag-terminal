@@ -1,3 +1,9 @@
+## Document Reader (LangChain + Qdrant)
+
+AI-powered document reader with RAG. Ingest your files, index into Qdrant, and query using Mistral/Gemini embeddings via LangChain. HTML ingestion extracts paragraph `\u003cp\u003e` tags by default. Includes a simple web UI with a terminal-style prompt.
+
+![App Overview](docs/images/screenshot.png)
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
