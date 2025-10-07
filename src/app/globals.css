@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #ffffff;
@@ -23,4 +23,194 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Classic CRT terminal vibes */
+.crt {
+  position: relative;
+  background: #000;
+  color: #32cd32; /* lime green */
+  text-shadow: 0 0 2px rgba(50, 205, 50, 0.6), 0 0 6px rgba(50, 205, 50, 0.3);
+  box-shadow: inset 0 0 60px rgba(0, 255, 0, 0.08), inset 0 0 200px rgba(0, 255, 0, 0.06);
+  overflow: hidden;
+}
+
+.crt:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03) 0px,
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+}
+
+.crt:after {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 0;
+  right: 0;
+  height: 20%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
+  animation: crt-scan 6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes crt-scan {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.05;
+  }
+  100% {
+    transform: translateY(600%);
+    opacity: 0.15;
+  }
+}
+
+.crt-flicker {
+  animation: crt-flicker 2.2s infinite;
+}
+
+@keyframes crt-flicker {
+  0%,
+  19%,
+  21%,
+  23%,
+  80%,
+  100% {
+    opacity: 1;
+  }
+  20%,
+  22% {
+    opacity: 0.95;
+  }
+  81% {
+    opacity: 0.98;
+  }
+}
+
+.crt-glow {
+  filter: drop-shadow(0 0 3px rgba(50, 205, 50, 0.5)) drop-shadow(0 0 6px rgba(50, 205, 50, 0.3));
+}
+
+/* Extra text glow for inputs/text where filter may not apply */
+.glow-text {
+  text-shadow: 0 0 2px rgba(50, 205, 50, 0.6), 0 0 6px rgba(50, 205, 50, 0.35);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  will-change: filter, text-shadow;
+}
+
+.caret-neon::placeholder {
+  color: rgba(0, 255, 0, 0.35);
+}
+
+.caret-neon {
+  caret-color: #32cd32;
+}
+
+/* Custom block cursor */
+.caret-hidden {
+  caret-color: transparent;
+}
+
+.cursor-block {
+  position: absolute;
+  width: 0.6ch;
+  height: 1.2em;
+  background: #32cd32;
+  box-shadow: 0 0 6px rgba(50, 205, 50, 0.6), 0 0 12px rgba(50, 205, 50, 0.35);
+  animation: cursor-blink 1.05s steps(1) infinite;
+}
+
+@keyframes cursor-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* CRT faceplate and curvature effects */
+.crt-faceplate {
+  position: relative;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(0, 0, 0, 0.35) 80%
+  );
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.6), inset 0 0 120px rgba(0, 0, 0, 0.4),
+    0 8px 24px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.screen-curvature {
+  transform: perspective(1200px) translateZ(0);
+}
+
+/* Subtle bulge/convex illusion via inner highlights and shadows */
+.bulge-effect {
+  box-shadow: inset 0 24px 60px rgba(255, 255, 255, 0.06), inset 0 -24px 60px rgba(0, 0, 0, 0.5),
+    inset 20px 0 60px rgba(0, 0, 0, 0.35), inset -20px 0 60px rgba(0, 0, 0, 0.35);
+}
+
+/* Overall retro display vibe with vignette and faint scanlines overlay */
+.retro-display::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.5) 100%);
+  mix-blend-mode: multiply;
+}
+
+/* Optional subtle scanlines if base .crt doesn't already add them */
+.retro-display::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.08) 0px,
+    rgba(0, 0, 0, 0.08) 1px,
+    transparent 2px,
+    transparent 3px
+  );
+  opacity: 0.35;
+}
+
+/* Convex glass highlight */
+.convex-glass::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 60%;
+  height: 40%;
+  background: radial-gradient(
+    circle at 30% 40%,
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.02) 60%,
+    transparent 70%
+  );
+  filter: blur(6px);
+  pointer-events: none;
+  transform: rotate(-8deg);
 }
